@@ -5,6 +5,7 @@ import subprocess
 import sys
 from setuptools.command.install import install as _install
 from distutils.sysconfig import get_python_lib
+import versioneer
 
 DISTNAME = 'research_jupyter_templates'
 DESCRIPTION = "I will here be experimenting with jupyter notebook templates, with a good structure that enforces good documentation and that can be used over and over again."
@@ -15,7 +16,7 @@ MAINTAINER_EMAIL = 'maa@sspa.se'
 URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
-VERSION = '0.1.0'
+VERSION = version=versioneer.get_version(),
 INSTALL_REQUIRES = ['jupyterlab','jupyterlab_templates']
 CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Intended Audience :: Developers',
@@ -83,9 +84,7 @@ setup(
     packages=find_packages(),
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
-    cmdclass={ 
-                    'install': Install,
-                    },
+    cmdclass=versioneer.get_cmdclass(Install),
     package_data={  # Optional
         'research_jupyter_templates': ['*.ipynb'],
     },
