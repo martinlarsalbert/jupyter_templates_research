@@ -1,9 +1,38 @@
 from setuptools import find_packages, setup
+import codecs
 import os.path
 import subprocess
 import sys
 from setuptools.command.install import install as _install
 from distutils.sysconfig import get_python_lib
+
+DISTNAME = 'research_jupyter_templates'
+DESCRIPTION = "I will here be experimenting with jupyter notebook templates, with a good structure that enforces good documentation and that can be used over and over again."
+with codecs.open('README.md', encoding='utf-8-sig') as f:
+    LONG_DESCRIPTION = f.read()
+MAINTAINER = 'Martin Alexandersson'
+MAINTAINER_EMAIL = 'maa@sspa.se'
+URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
+LICENSE = 'MIT'
+DOWNLOAD_URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
+VERSION = '0.1.0'
+INSTALL_REQUIRES = ['jupyterlab','jupyterlab_templates']
+CLASSIFIERS = ['Intended Audience :: Science/Research',
+               'Intended Audience :: Developers',
+               'License :: OSI Approved',
+               'Programming Language :: Python',
+               'Topic :: Software Development',
+               'Topic :: Scientific/Engineering',
+               'Operating System :: Microsoft :: Windows',
+               'Operating System :: POSIX',
+               'Operating System :: Unix',
+               'Operating System :: MacOS',
+               'Programming Language :: Python :: 2.7',
+               'Programming Language :: Python :: 3.5',
+               'Programming Language :: Python :: 3.6',
+               'Programming Language :: Python :: 3.7']
+EXTRAS_REQUIRE = {}
+
 
 def copy_templates():
     import research_jupyter_templates
@@ -40,13 +69,20 @@ class Install(_install):
         copy_templates()
 
 setup(
-    name='research_jupyter_templates',
+    name=DISTNAME,
+    maintainer=MAINTAINER,
+    maintainer_email=MAINTAINER_EMAIL,
+    description=DESCRIPTION,
+    license=LICENSE,
+    url=URL,
+    version=VERSION,
+    download_url=DOWNLOAD_URL,
+    long_description=LONG_DESCRIPTION,
+    zip_safe=False,  # the package can run out of an .egg file
+    classifiers=CLASSIFIERS,
     packages=find_packages(),
-    version='0.1.0',
-    description="Documenting what my notebooks do is something that I'm usually pretty lazy about. I will here be experimenting with jupyter notebook templates, with a good structure that enforces good documentation and that can be used over and over again.",
-    author='Martin Alexandersson',
-    license='MIT',
-    install_requires=['jupyterlab','jupyterlab_templates'],
+    install_requires=INSTALL_REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
     cmdclass={ 
                     'install': Install,
                     },
