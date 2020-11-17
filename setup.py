@@ -17,7 +17,7 @@ URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
 LICENSE = 'MIT'
 DOWNLOAD_URL = 'https://github.com/martinlarsalbert/research_jupyter_templates'
 VERSION = version=versioneer.get_version(),
-INSTALL_REQUIRES = ['jupyterlab','jupyterlab_templates']
+INSTALL_REQUIRES = ['versioneer','jupyterlab','jupyterlab_templates']
 CLASSIFIERS = ['Intended Audience :: Science/Research',
                'Intended Audience :: Developers',
                'License :: OSI Approved',
