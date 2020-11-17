@@ -3,6 +3,24 @@ import os.path
 import subprocess
 import sys
 from setuptools.command.install import install as _install
+from distutils.sysconfig import get_python_lib
+
+def copy_templates():
+    import research_jupyter_templates
+    import os.path
+    import shutil
+    import glob
+    
+    
+    for file in glob.glob(os.path.join(research_jupyter_templates.path,'*.ipynb')):
+        
+        site_packages_path = get_python_lib()
+    
+        dest_dir = os.path.join(site_packages_path,'jupyterlab_templates','templates','jupyterlab_templates')
+    
+        print('Copy %s to %s' %(file,dest_dir))
+    
+        shutil.copy(file, dest_dir)
 
 
 class Install(_install):
@@ -18,6 +36,9 @@ class Install(_install):
                          stdout=subprocess.PIPE, 
                          universal_newlines=True)
 
+
+        copy_templates()
+
 setup(
     name='research_jupyter_templates',
     packages=find_packages(),
@@ -29,4 +50,7 @@ setup(
     cmdclass={ 
                     'install': Install,
                     },
+    package_data={  # Optional
+        'research_jupyter_templates': ['*.ipynb'],
+    },
 )
